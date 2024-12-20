@@ -1,3 +1,7 @@
-mlflow
-scikit-learn
+streamlit>=1.10.0
+mlflow>=2.3.0
 pandas
+numpy
+scikit-learn
+python-dotenv
+requests
