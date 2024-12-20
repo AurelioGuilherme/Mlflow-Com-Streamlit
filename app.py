@@ -11,7 +11,7 @@ import subprocess
 import os
 
 # Load the dataset
-data = pd.read_csv('Data/IMDb movies.csv')
+data = pd.read_csv('Data/IMDb movies.csv', low_memory=False)
 
 # Preprocessing: Select relevant columns and drop NaN values
 data = data[['duration', 'avg_vote', 'votes', 'budget', 'worlwide_gross_income']]
@@ -47,6 +47,6 @@ if st.button('Train Model'):
 # Button to launch MLflow UI
 if st.button('Launch MLflow UI'):
     st.write('Launching MLflow UI...')
-    subprocess.Popen(['python', '-m', 'mlflow', 'ui', '--host', '0.0.0.0', '--port', '5000'], shell=True)
+    subprocess.Popen(['mlflow',"ui", '--host', '0.0.0.0', '--port', '5000'])
     st.write('MLflow UI is running at http://localhost:5000')
 
