@@ -94,6 +94,13 @@ def train_model(X_train, X_test, y_train, y_test, params):
     except Exception as e:
         st.error(f"Erro no treinamento do modelo: {str(e)}")
         return None, None, None, None
+def get_mlflow_ui_url():
+    """Retorna a URL do MLflow UI no DagsHub"""
+    tracking_uri = os.getenv('MLFLOW_TRACKING_URI', '')
+    # Remove '.mlflow' do final da URI se existir
+    if tracking_uri.endswith('.mlflow'):
+        tracking_uri = tracking_uri[:-7]
+    return tracking_uri
 
 def main():
     st.title('IMDb Movies Box Office Prediction com MLflow')
@@ -102,6 +109,17 @@ def main():
     if not init_mlflow():
         st.error("Falha ao inicializar MLflow. Verifique sua configuração.")
         return
+    
+        # Adicionar botão para MLflow UI no topo
+    _, col2 = st.columns([3, 1])
+    with col2:
+        mlflow_ui_url = get_mlflow_ui_url()
+        if st.button('Abrir MLflow UI'):
+            # Usar HTML para abrir em nova aba
+            js = f"window.open('{mlflow_ui_url}')"
+            html = f'<script language="javascript">{js}</script>'
+            st.components.v1.html(html, height=0)
+            st.success(f"MLflow UI aberto em nova aba!")
     
     # Carregar dados
     data = load_and_preprocess_data()
