@@ -26,9 +26,9 @@ def init_mlflow():
     """Initialize MLflow with DagsHub"""
     try:
         # Configurar MLflow - DagsHub
-        MLFLOW_TRACKING_URI = os.getenv('MLFLOW_TRACKING_URI')
-        MLFLOW_TRACKING_USERNAME = os.getenv('MLFLOW_TRACKING_USERNAME')
-        MLFLOW_TRACKING_PASSWORD = os.getenv('MLFLOW_TRACKING_PASSWORD')
+        MLFLOW_TRACKING_URI = 'https://dagshub.com/api/v1/repo-buckets/s3/AurelioGuilherme'
+        MLFLOW_TRACKING_USERNAME = "AurelioGuilherme"
+        MLFLOW_TRACKING_PASSWORD = "c16fa308b9702454d88ad9a3173649b92608e2c2"
 
         # Configurar URI com autenticação básica
         mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
